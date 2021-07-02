@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UserTableSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class UserTableSeeder extends Seeder
                 'email' => 'demo@academic.com',
                 'email_verified_at' => '2021-07-01',
                 'password' => bcrypt('12345678'),
+                'access_token' => Str::random(16),
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -27,6 +29,6 @@ class UserTableSeeder extends Seeder
 
 
         factory(\App\ClassModel::class, 5)->create();
-        factory(\App\Student::class, 20)->create();
+        factory(\App\Student::class, random_int(1, 10))->create();
     }
 }

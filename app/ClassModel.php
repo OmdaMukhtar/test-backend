@@ -13,7 +13,6 @@ class ClassModel extends Model
         'status',
         'description',
         'max_students',
-        'students',
     ];
 
     public function students()

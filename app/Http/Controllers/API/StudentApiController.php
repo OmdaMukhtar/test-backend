@@ -17,7 +17,7 @@ class StudentApiController extends Controller
      */
     public function index()
     {
-        $students = Student::paginate();
+        $students = Student::latest('updated_at')->paginate();
         return (new StudentCollection($students));
     }
 
@@ -40,7 +40,6 @@ class StudentApiController extends Controller
     public function store(StoreStudentRequest $request)
     {
         try {
-
             Student::create([
                 'class_id'      => $request->class_id,
                 'date_of_birth' => $request->date_of_birth,
@@ -95,7 +94,7 @@ class StudentApiController extends Controller
     {
 
         try {
-            $student->fill([$request->all()]);
+            $student->fill($request->all());
             $student->save();
 
             return response()->json([

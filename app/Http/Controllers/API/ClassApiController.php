@@ -17,7 +17,7 @@ class ClassApiController extends Controller
      */
     public function index()
     {
-        $classes = ClassModel::paginate();
+        $classes = ClassModel::latest('updated_at')->paginate();
         return new ClassCollection($classes);
     }
 
@@ -43,7 +43,6 @@ class ClassApiController extends Controller
         try {
 
             ClassModel::create([
-                'max_students'  =>$request->max_students,
                 'code'          =>$request->code,
                 'name'          =>$request->name,
                 'status'        =>$request->status,
@@ -94,13 +93,11 @@ class ClassApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClassModel $classe)
+    public function update(Request $request, ClassModel $classmodel)
     {
-
-
         try {
-            $classe->fill([$request->all()]);
-            $classe->save();
+            $classmodel->fill($request->all());
+            $classmodel->save();
 
             return response()->json([
                 'status' => true,
@@ -121,12 +118,12 @@ class ClassApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClassModel $class_model)
+    public function destroy(ClassModel $classmodel)
     {
         try {
 
-            if(! is_null($class_model)){
-                $class_model->delete();
+            if(! is_null($classmodel)){
+                $classmodel->delete();
 
 
                 return response()->json([
@@ -139,7 +136,7 @@ class ClassApiController extends Controller
 
             return response()->json([
                 'status' => false,
-                'message' => 'record is not deleted'
+                'message' => $th->getMessage()
             ], 200);
         }
     }

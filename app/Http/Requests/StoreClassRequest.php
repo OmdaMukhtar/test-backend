@@ -24,7 +24,6 @@ class StoreClassRequest extends FormRequest
     public function rules()
     {
         return [
-            'max_students' => ['required', 'integer'],
             'code' => ['required'],
             'name' => ['required'],
             'status' => ['required', 'between:0,1']

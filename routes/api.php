@@ -18,14 +18,22 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::group(['prefix' => 'admin', 'namespace' => '\App\Http\Controllers\API'], function () {
+Route::group(['prefix' => 'academic', 'namespace' => '\App\Http\Controllers\API'], function () {
+
+    /* Auth apis */
+    Route::POST('login', 'AuthApiController@login');
+
+    Route::POST('logout', 'AuthApiController@logout');
+
     /* Class Api */
     Route::GET('/classes', 'ClassApiController@index');
     Route::POST('/classes', 'ClassApiController@store');
     Route::PUT('/classes/{classmodel}', 'ClassApiController@update');
+    Route::DELETE('/classes/{classmodel}', 'ClassApiController@destroy');
 
     /* Student Api */
     Route::GET('/students/{classmodel?}/', 'StudentApiController@index');
     Route::POST('/students', 'StudentApiController@store');
     Route::PUT('/students/{student}', 'StudentApiController@update');
+    Route::DELETE('/students/{student}', 'StudentApiController@destroy');
 });
