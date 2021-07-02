@@ -6,6 +6,7 @@ use App\ClassModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClassRequest;
 use App\Http\Resources\ClassCollection;
+use App\Http\Resources\StudentCollection;
 use Illuminate\Http\Request;
 
 class ClassApiController extends Controller
@@ -70,9 +71,9 @@ class ClassApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ClassModel $classmodel)
     {
-        //
+        return new StudentCollection($classmodel->students);
     }
 
     /**

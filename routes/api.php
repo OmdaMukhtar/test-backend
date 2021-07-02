@@ -27,12 +27,13 @@ Route::group(['prefix' => 'academic', 'namespace' => '\App\Http\Controllers\API'
 
     /* Class Api */
     Route::GET('/classes', 'ClassApiController@index');
+    Route::GET('/classes/{classmodel}/', 'ClassApiController@show');
     Route::POST('/classes', 'ClassApiController@store');
     Route::PUT('/classes/{classmodel}', 'ClassApiController@update');
     Route::DELETE('/classes/{classmodel}', 'ClassApiController@destroy');
 
     /* Student Api */
-    Route::GET('/students/{classmodel?}/', 'StudentApiController@index');
+    Route::GET('/students', 'StudentApiController@index');
     Route::POST('/students', 'StudentApiController@store');
     Route::PUT('/students/{student}', 'StudentApiController@update');
     Route::DELETE('/students/{student}', 'StudentApiController@destroy');
