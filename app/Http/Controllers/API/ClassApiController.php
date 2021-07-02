@@ -122,6 +122,12 @@ class ClassApiController extends Controller
     public function destroy(ClassModel $classmodel)
     {
         try {
+            if($classmodel->students()->count()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'delete child record first'
+                ], 200);
+            }
 
             if(! is_null($classmodel)){
                 $classmodel->delete();
