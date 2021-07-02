@@ -24,5 +24,9 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now()
             ],
         ));
+
+
+        factory(\App\ClassModel::class, 5)->create();
+        factory(\App\Student::class, 20)->create();
     }
 }
